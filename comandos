@@ -1,11 +1,11 @@
 ****************************************************************
 echo "# OneBitForms" >> README.md
 git init
-git add README.md
+git add .
 git commit -m "first commit"
 git remote add origin git@github.com:thbdias/OneBitForms.git
 git push -u origin master
 ****************************************************************
 
 docker run -it --rm --user "$(id -u):$(id -g)" -v "$PWD":/usr/src/app -w /usr/src/app rails rails _5.0.1_ new --skip-bundle onebitforms --database=postgresql --api
-
+docker-compose build
