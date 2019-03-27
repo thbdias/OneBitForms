@@ -16,6 +16,7 @@ docker-compose run --rm app bundle install
 docker-compose run --rm app bundle exec rake db:create db:migrate
 docker-compose run --rm app bundle exec rails db:migrate
 docker-compose up
+docker-compose run --rm app bundle exec rake db:drop db:create db:migrate
 
 --> RSpec 
 docker-compose run --rm app bundle exec rails generate rspec:install
@@ -23,6 +24,18 @@ docker-compose run --rm app bundle exec rails generate rspec:install
 --> Devise 
 docker-compose run app bundle exec rails g devise_token_auth:install
 
+--> Models 
+docker-compose run --rm app bundle exec rails g model form title:string description:text user:references primary_color:string enable:boolean
+docker-compose run --rm app bundle exec rails g model question title:text kind:integer form:references
+docker-compose run --rm app bundle exec rails g model answer user:references form:references
+docker-compose run --rm app bundle exec rails g model questions_answer value:text answer:references question:references
+
+--> Controllers
+docker-compose run app bundle exec rails g controller api/v1/Forms index show update create destroy --no-controller-specs
+docker-compose run app bundle exec rails g controller api/v1/Questions create update destroy --no-controller-specs
+docker-compose run app bundle exec rails g controller api/v1/Answers index show create destroy --no-controller-specs
+
 --> Teste no console
 curl -X POST http://localhost:3000/api/v1/auth -d '{"email": "teste@teste.com", "password": "12345678", "password_confirmation": "12345678", "confirm_success_url": "http://localhost:4200/register"}' -H "Content-Type: application/json"
+curl -X POST http://localhost:3000/api/v1/auth -d '{"email": "teste2@teste2.com", "password": "12345678", "password_confirmation": "12345678", "confirm_success_url": "http://localhost:4200/register"}' -H "Content-Type: application/json"
 *************************************************************************************************************************************************************
