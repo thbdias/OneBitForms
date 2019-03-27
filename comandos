@@ -14,7 +14,15 @@ docker run -it --rm --user "$(id -u):$(id -g)" -v "$PWD":/usr/src/app -w /usr/sr
 docker-compose build
 docker-compose run --rm app bundle install
 docker-compose run --rm app bundle exec rake db:create db:migrate
+docker-compose run --rm app bundle exec rails db:migrate
+docker-compose up
 
 --> RSpec 
 docker-compose run --rm app bundle exec rails generate rspec:install
+
+--> Devise 
+docker-compose run app bundle exec rails g devise_token_auth:install
+
+--> Teste no console
+curl -X POST http://localhost:3000/api/v1/auth -d '{"email": "teste@teste.com", "password": "12345678", "password_confirmation": "12345678", "confirm_success_url": "http://localhost:4200/register"}' -H "Content-Type: application/json"
 *************************************************************************************************************************************************************
