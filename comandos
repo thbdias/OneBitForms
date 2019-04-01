@@ -38,4 +38,9 @@ docker-compose run app bundle exec rails g controller api/v1/Answers index show 
 --> Teste no console
 curl -X POST http://localhost:3000/api/v1/auth -d '{"email": "teste@teste.com", "password": "12345678", "password_confirmation": "12345678", "confirm_success_url": "http://localhost:4200/register"}' -H "Content-Type: application/json"
 curl -X POST http://localhost:3000/api/v1/auth -d '{"email": "teste2@teste2.com", "password": "12345678", "password_confirmation": "12345678", "confirm_success_url": "http://localhost:4200/register"}' -H "Content-Type: application/json"
+
+--> Teste de Request
+docker-compose run --rm app bundle exec rails g rspec:request api/v1/forms
+docker-compose run --rm app bundle exec rails g rspec:request api/v1/questions
+docker-compose run --rm app bundle exec rails g rspec:request api/v1/answers
 *************************************************************************************************************************************************************
