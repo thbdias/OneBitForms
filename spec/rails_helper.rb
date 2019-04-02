@@ -7,6 +7,11 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 config.include Devise::Test::ControllerHelpers, type: :controller
 
+# Custom json helpers
+config.include Requests::JsonHelpers, type: :request
+# Custom Header helpers
+config.include Requests::HeaderHelpers, type: :request
+
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
