@@ -3,7 +3,7 @@ FactoryBot.define do
   # gerando uma data menor que hoje e colocando dentro do timestamp
   timestamp = loop do
     date = FFaker::Time.date.to_time
-    break date.strftime("%F %T") if date &lt;= Date.today
+    break date.strftime("%F %T") if date <= Date.today
   end
 
   factory :user do
@@ -12,10 +12,10 @@ FactoryBot.define do
     name         { FFaker::Name.name }
     nickname     { FFaker::Internet.user_name }
     password     { FFaker::Lorem.word }
-    provider     'email'
-    confirmed_at timestamp
-    created_at   timestamp
-    updated_at   timestamp
+    provider     {'email'}
+    confirmed_at {timestamp}
+    created_at   {timestamp}
+    updated_at   {timestamp}
   end
 
 end
