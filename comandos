@@ -29,6 +29,10 @@ docker-compose run --rm app bundle exec rails g model form title:string descript
 docker-compose run --rm app bundle exec rails g model question title:text kind:integer form:references
 docker-compose run --rm app bundle exec rails g model answer user:references form:references
 docker-compose run --rm app bundle exec rails g model questions_answer value:text answer:references question:references
+docker-compose run --rm app bundle exec rails generate friendly_id
+docker-compose run --rm app bundle exec rails g migration AddSlugToForms
+docker-compose run --rm app bundle exec rails g migration remove_user_id_from_answer user_id
+
 
 --> Controllers
 docker-compose run app bundle exec rails g controller api/v1/Forms index show update create destroy --no-controller-specs

@@ -1,6 +1,5 @@
 FactoryBot.define do
-  factory :answer do
-    user 
+  factory :answer do    
     form 
   end
 end
