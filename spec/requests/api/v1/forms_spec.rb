@@ -57,9 +57,8 @@ RSpec.describe "Api::V1::Forms", type: :request do
           expect_status(200)
         end
  
-        it "returned Form with right datas" do
-          # get "/api/v1/forms/#{@form.friendly_id}", params: {}, headers: header_with_authentication(@user)
-          expect(json).to eql(JSON.parse(@form.to_json))
+        it "returned Form with right datas" do          
+          expect(json.except('questions')).to eql(JSON.parse(@form.to_json))
         end
 
         it "returned associated questions" do
@@ -74,8 +73,7 @@ RSpec.describe "Api::V1::Forms", type: :request do
         end
  
         it "returns 404" do
-          # get "/api/v1/forms/#{FFaker::Lorem.word}", params: {id: @form.friendly_id}, headers: header_with_authentication(@user)
-          get "/api/v1/forms/#{@form.friendly_id}", params: {id: @form.friendly_id}, headers: header_with_authentication(@user)
+          get "/api/v1/forms/#{FFaker::Lorem.word}", params: {id: @form.friendly_id}, headers: header_with_authentication(@user)          
           expect_status(404)
         end
       end

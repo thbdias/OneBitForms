@@ -21,6 +21,9 @@ docker-compose run --rm app bundle exec rake db:drop db:create db:migrate
 --> RSpec 
 docker-compose run --rm app bundle exec rails generate rspec:install
 
+--> Testando
+docker-compose run --rm app bundle exec rspec spec/requests/api/v1/forms_spec.rb
+
 --> Devise 
 docker-compose run app bundle exec rails g devise_token_auth:install
 
