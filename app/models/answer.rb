@@ -8,6 +8,8 @@ class Answer < ApplicationRecord
   validates :form, presence: true
   
  
+  # self -> permite que uma classe chame direto o método como no exemplo:
+  #               Answer.create_with_questions_answers
   def self.create_with_questions_answers form, questions_answers
     answer = nil
     ActiveRecord::Base.transaction do
